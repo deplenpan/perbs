@@ -5,6 +5,7 @@ module.exports = {
         sourceType: 'module', //设置为 "script" (默认) 或 "module"（如果你的代码是 ECMAScript 模块)。
         ecmaFeatures: {
             'jsx': true,
+            'experimentalObjectRestSpread': true,
         },
     },
     'plugins': [
@@ -13,8 +14,17 @@ module.exports = {
     'rules': {
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
+        'prefer-destructuring': ['error', {
+            'VariableDeclarator': {
+                'array': false,
+                'object': true,
+            },
+            'AssignmentExpression': {
+                'array': true,
+                'object': true,
+            },
+        }, {
+            'enforceForRenamedProperties': false,
+        }],
     },
-    // "extends": [
-    //     "plugin:react-hooks/recommended"
-    // ]
 };

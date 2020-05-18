@@ -68,3 +68,5 @@ buck-out/
 .idea/sbt.xml
 .idea/vcs.xml
 !/.idea/
+/.idea/
+/.idea/
