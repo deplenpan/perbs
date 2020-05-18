@@ -70,3 +70,6 @@ buck-out/
 !/.idea/
 /.idea/
 /.idea/
+/.idea/
+!/.idea/
+src/action/popular/
