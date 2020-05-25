@@ -73,3 +73,10 @@ buck-out/
 /.idea/
 !/.idea/
 src/action/popular/
+!/src/action/popular/index.js
+.idea/.rnconsole
+.idea/ZeppelinRemoteNotebooks/
+.idea/httpRequests/
+.idea/shelf/
+.idea/workspace.xml
+src/imgs/
