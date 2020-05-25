@@ -15,7 +15,8 @@ const TopTab = createMaterialTopTabNavigator();
 
 const languages = ['Java', 'Python', 'Php', 'Ios', 'Android', 'Ruby', 'Go', 'Scala', 'Rust', 'C', 'Dart', 'Flutter'];
 
-class TopTabNavigator extends React.Component {
+
+export class TopTabNavigator extends React.Component {
 
     render() {
         return (

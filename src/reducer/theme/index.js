@@ -13,7 +13,7 @@ const defaultState = {
  * @param state
  * @returns {{theme: string}}
  */
-export default function onAction(state = defaultState, action) {
+export default function theme(state = defaultState, action) {
 
     switch (action.type) {
         case Types.THEME_CHANGE:
