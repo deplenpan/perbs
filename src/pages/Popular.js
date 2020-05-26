@@ -85,6 +85,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Popular)
 
 const styles = StyleSheet.create({
     rootContainer: {
-        flex: 1
+        flex: 1,
+        marginTop: 30,
     }
 });

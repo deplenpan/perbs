@@ -25,7 +25,7 @@ const defaultState = {};
 export default function popular(state = defaultState, action) {
     // 判断action类型
     switch (action.type) {
-        case Types.LOAD_POPULAR_SUCCESS:
+        case Types.POPULAR_REFRESH_SUCCESS:
             return {
                 ...state,
                 // 动态设置store key
