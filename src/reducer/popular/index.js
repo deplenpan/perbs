@@ -48,6 +48,7 @@ export default function popular(state = defaultState, action) {
                 [action.storeName]: {
                     ...[action.storeName],
                     isLoading: true,
+                    hideLoadingMore: true,
                 },
             };
         // 下拉刷新失败

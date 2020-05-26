@@ -13,7 +13,7 @@ const BottomTab = createBottomTabNavigator();
 
 const TopTab = createMaterialTopTabNavigator();
 
-const languages = ['Java', 'Python', 'Php', 'Ios', 'Android', 'Ruby', 'Go', 'Scala', 'Rust', 'C', 'Dart', 'Flutter'];
+const languages = ['Java', 'Python', 'Linux', 'Ruby', 'Go', 'Scala', 'Php', 'Ios', 'Android', 'React-Native', 'Dart', 'Flutter'];
 
 
 export class TopTabNavigator extends React.Component {

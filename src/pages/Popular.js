@@ -65,9 +65,11 @@ class Popular extends React.Component {
         return this._store().hideLoadingMore ? null :
             <View style={styles.indicatorContainer}>
                 <ActivityIndicator
-                    style={styles.indicator}
+                    animating={true}
+                    color={'tomato'}
+                    size={'large'}
                 />
-                <Text>Loading more data</Text>
+                <Text style={{fontSize: 20}}>Loading more data</Text>
             </View>
     }
 
@@ -103,10 +105,21 @@ class Popular extends React.Component {
                     }
                     ListFooterComponent={() => this.generateIndicator()}
                     onEndReached={() => {
-                        // 当列表下拉到底部时，加载更多数据，回调此组件
-                        this.loadData(true);
+                        setTimeout(() => {
+                            // 修复列表滚动时两次调用onEndReached
+                            if (this.canLoadMore) {
+                                // 当列表下拉到底部需要加载更多数据时调用
+                                this.loadData(true);
+                                this.canLoadMore = false;
+                            }
+                        }, 100);
                     }}
-                    onEndReachedThreshold={0.5}
+                    onEndReachedThreshold={2}
+                    // onMomentumScrollBegin prop is in ScrollView.js, not in FlatList.js
+                    onMomentumScrollBegin={() => {
+                        // 修复初始页调用onEndReached的问题
+                        this.canLoadMore = true;
+                    }}
                 />
                 <Toast
                     ref={'toast'}
@@ -131,13 +144,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Popular)
 const styles = StyleSheet.create({
     rootContainer: {
         flex: 1,
-        marginTop: 30,
     },
     indicatorContainer: {
         alignItems: 'center',
-    },
-    indicator: {
-        color: 'red',
-        margin: 10,
     },
 });
