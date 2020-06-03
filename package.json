@@ -18,6 +18,8 @@
     "@react-navigation/material-top-tabs": "^5.2.2",
     "@react-navigation/native": "^5.2.4",
     "@react-navigation/stack": "^5.2.19",
+    "GitHubTrending": "^5.0.0",
+    "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-easy-toast": "^1.2.0",

@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import theme from './theme';
 import popular from './popular';
+import trending from './trending';
 // import DynamicNavigator from '../navigators/DynamicNavigator'
 //
 // const navigationReducer = (state = navigationState, action) => {
@@ -15,7 +16,8 @@ import popular from './popular';
  */
 const rootReducers = combineReducers({
     theme: theme,
-    popular: popular
+    popular: popular,
+    trending: trending,
 });
 
 export default rootReducers;

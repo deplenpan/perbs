@@ -13,10 +13,13 @@ const BottomTab = createBottomTabNavigator();
 
 const TopTab = createMaterialTopTabNavigator();
 
-const languages = ['Java', 'Python', 'Linux', 'Ruby', 'Go', 'Scala', 'Php', 'Ios', 'Android', 'React-Native', 'Dart', 'Flutter'];
+const languages = ['Java', 'Node', 'Javascript', 'Typescript', 'Python', 'Linux', 'Ruby', 'Go',
+    'Scala', 'Php', 'Ios', 'Android', 'React-Native', 'Flutter'];
 
 
-export class TopTabNavigator extends React.Component {
+const topics = ['All', 'Java', 'Python', 'Go', 'Ruby', 'C++', 'Dart', 'Javascript', 'Typescript'];
+
+export class PopularTopTabNavigator extends React.Component {
 
     render() {
         return (
@@ -30,7 +33,7 @@ export class TopTabNavigator extends React.Component {
                 tabBarOptions={{
                     activeTintColor: 'tomato',
                     inactiveTintColor: 'gray',
-                    tabWidth: 40,
+                    tabWidth: 30,
                     scrollEnabled: true,
                     labelStyle: {fontSize: 12},
                     // style: {backgroundColor: 'powderblue'},
@@ -38,20 +41,34 @@ export class TopTabNavigator extends React.Component {
                     indicatorStyle: {backgroundColor: 'skyblue', height: 2},
                 }}
             >
-                <TopTab.Screen name={languages[0]} component={Popular}/>
-                <TopTab.Screen name={languages[1]} component={Popular}/>
-                <TopTab.Screen name={languages[2]} component={Popular}/>
-                <TopTab.Screen name={languages[3]} component={Popular}/>
-                <TopTab.Screen name={languages[4]} component={Popular}/>
-                <TopTab.Screen name={languages[5]} component={Popular}/>
-                <TopTab.Screen name={languages[6]} component={Popular}/>
-                <TopTab.Screen name={languages[7]} component={Popular}/>
-                <TopTab.Screen name={languages[8]} component={Popular}/>
-                <TopTab.Screen name={languages[9]} component={Popular}/>
-                <TopTab.Screen name={languages[10]} component={Popular}/>
-                <TopTab.Screen name={languages[11]} component={Popular}/>
+                {languages.map((item, index) => {
+                    return <TopTab.Screen key={index} name={item} component={Popular}/>
+                })}
             </TopTab.Navigator>
         );
+    }
+}
+
+export class TrendingTopTabNavigator extends React.Component {
+    render() {
+        return (
+            <TopTab.Navigator
+                tabBarOptions={{
+                    activeTintColor: 'orange',
+                    inactiveTintColor: 'gray',
+                    tabWidth: 30,
+                    scrollEnabled: true,
+                    labelStyle: {fontSize: 12},
+                    // style: {backgroundColor: 'powderblue'},
+                    style: {backgroundColor: 'skyblue'},
+                    indicatorStyle: {backgroundColor: 'skyblue', height: 2},
+                }}
+            >
+                {topics.map((item, index) => {
+                    return <TopTab.Screen key={index} name={item} component={Trending}/>
+                })}
+            </TopTab.Navigator>
+        )
     }
 }
 
@@ -91,7 +108,7 @@ export default class HomeTabNavigator extends React.Component {
             >
                 <BottomTab.Screen
                     name={'Popular'}
-                    component={TopTabNavigator}
+                    component={PopularTopTabNavigator}
                     options={{
                         tabBarLabel: '最热',
                     }}
@@ -105,7 +122,7 @@ export default class HomeTabNavigator extends React.Component {
                 />
                 <BottomTab.Screen
                     name={'Trending'}
-                    component={Trending}
+                    component={TrendingTopTabNavigator}
                     options={{
                         tabBarLabel: '趋势',
                     }}

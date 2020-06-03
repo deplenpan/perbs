@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import actions from '../action/index';
 import PopularItem from "../common/PopularItem";
 import Toast from 'react-native-easy-toast';
+// import NavigationBar from "../common/NavigationBar";
 
 const URL = "https://api.github.com/search/repositories?q=";
 
@@ -84,6 +85,16 @@ class Popular extends React.Component {
     }
 
     render() {
+        // let statusBar = {
+        //     backgroundColor: 'red',
+        //     barStyle: 'light-content',
+        // };
+        //
+        // let navigationBar = <NavigationBar
+        //     title={'最热'}
+        //     statusBar={statusBar}
+        //     style={{backgroundColor: 'red'}}
+        // />
         let store = this._store();
         return (
             <View style={styles.rootContainer}>

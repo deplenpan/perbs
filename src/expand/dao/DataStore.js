@@ -1,5 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import Trending from 'GitHubTrending';
 
+// auth-token定期更新，当前可用auth-token：fd82d1e882462e23b8e88aa82198f166
+const AUTH_TOKEN = 'fd82d1e882462e23b8e88aa82198f166';
+export const FLAG_STORAGE = {flag_popular: 'popular', flag_trending: 'trending'}
 export default class DataStore {
     //   constructor(props) {
     //     super(props);
@@ -41,14 +45,20 @@ export default class DataStore {
     }
 
 
-    fetchData(url) {
+    /**
+     * 获取数据，优先获取本地数据，如果无本地数据或者本地数据过期，则获取网络数据
+     * @param url
+     * @param flag 数据标志
+     * @returns {Promise<R>}
+     */
+    fetchData(url, flag) {
         return new Promise((resolve, reject) => {
             this.fetchLocalData(url)
                 .then(wrapData => {
                     if (wrapData && DataStore.checkTimestampValid(wrapData.timestamp)) {
                         resolve(wrapData);
                     } else {
-                        this.fetchNetWorkData(url)
+                        this.fetchNetWorkData(url, flag)
                             .then(data => {
                                 resolve(this._wrapData(data));
                             })
@@ -56,7 +66,7 @@ export default class DataStore {
                     }
                 })
                 .catch(error => {
-                    this.fetchNetWorkData(url)
+                    this.fetchNetWorkData(url, flag)
                         .then(data => resolve(this._wrapData(data)))
                         .catch(() => {
                             reject(error);
@@ -117,22 +127,39 @@ export default class DataStore {
     /**
      * 获取网络数据
      * @param {*} url url
+     * @param {*} flag 数据标志
      * @returns {Promise}
      */
-    fetchNetWorkData(url) {
+    fetchNetWorkData(url, flag) {
         return new Promise((resolve, reject) => {
-            fetch(url)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Network response was not ok');
-                })
-                .then(responseData => {
-                    this.storeData(url, responseData);
-                    resolve(responseData);
-                })
-                .catch(error => reject(error));
+            if (flag !== FLAG_STORAGE.flag_trending) {
+                fetch(url)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('Network response was not ok');
+                    })
+                    .then(responseData => {
+                        this.storeData(url, responseData);
+                        resolve(responseData);
+                    })
+                    .catch(error => reject(error));
+            } else {
+                new Trending(AUTH_TOKEN).fetchTrending(url)
+                    .then(items => {
+                        if (!items) {
+                            throw new Error('response is null');
+                        }
+                        this.storeData(url, items);
+                        resolve(items)
+                    })
+                    .catch(
+                        error => {
+                            reject(error);
+                        }
+                    )
+            }
         });
     }
 }
