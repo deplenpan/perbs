@@ -1,6 +1,7 @@
 import React from 'react'
 import {DeviceEventEmitter, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import HTMLView from 'react-native-htmlview';
 
 export default class TrendingItem extends React.Component {
 
@@ -21,7 +22,7 @@ export default class TrendingItem extends React.Component {
         if (!data) {
             return null;
         }
-
+        let description = '<p>' + data.description + '</p>'
         return (
             <TouchableOpacity
                 onPress={this.props.onSelect}
@@ -30,12 +31,24 @@ export default class TrendingItem extends React.Component {
                     <Text style={styles.title}>
                         {data.fullName}
                     </Text>
+                    <HTMLView
+                        value={description}
+                        // onLinkPress={(url) => {
+                        // }}
+                        stylesheet={{
+                            p: styles.description,
+                            a: styles.description,
+                        }}
+                    />
+                    {/*<Text style={styles.description}>*/}
+                    {/*    {data.description}*/}
+                    {/*</Text>*/}
                     <Text style={styles.description}>
-                        {data.description}
+                        {data.meta}
                     </Text>
                     <View style={styles.row}>
                         <View style={styles.row}>
-                            <Text>Author:</Text>
+                            <Text>Built by:</Text>
                             {data.contributors.map((result, i, arr) => {
                                 return <Image
                                     key={i}
@@ -45,10 +58,10 @@ export default class TrendingItem extends React.Component {
                             })}
 
                         </View>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text>Stars:</Text>
-                            <Text>{data.starCount}</Text>
-                        </View>
+                        {/*<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>*/}
+                        {/*    <Text>Stars:</Text>*/}
+                        {/*    <Text>{data.starCount}</Text>*/}
+                        {/*</View>*/}
                         <TouchableOpacity
                             style={{padding: 5}}
                             onPress={() => {

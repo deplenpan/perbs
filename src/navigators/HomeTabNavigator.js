@@ -38,7 +38,7 @@ export class PopularTopTabNavigator extends React.Component {
                     labelStyle: {fontSize: 12},
                     // style: {backgroundColor: 'powderblue'},
                     style: {backgroundColor: 'skyblue'},
-                    indicatorStyle: {backgroundColor: 'skyblue', height: 2},
+                    indicatorStyle: {backgroundColor: 'tomato', height: 2},
                 }}
             >
                 {languages.map((item, index) => {
@@ -61,7 +61,7 @@ export class TrendingTopTabNavigator extends React.Component {
                     labelStyle: {fontSize: 12},
                     // style: {backgroundColor: 'powderblue'},
                     style: {backgroundColor: 'skyblue'},
-                    indicatorStyle: {backgroundColor: 'skyblue', height: 2},
+                    indicatorStyle: {backgroundColor: 'orange', height: 2},
                 }}
             >
                 {topics.map((item, index) => {
@@ -114,17 +114,17 @@ export default class HomeTabNavigator extends React.Component {
                     }}
                 />
                 <BottomTab.Screen
-                    name={'Favorite'}
-                    component={Favorite}
-                    options={{
-                        tabBarLabel: '收藏',
-                    }}
-                />
-                <BottomTab.Screen
                     name={'Trending'}
                     component={TrendingTopTabNavigator}
                     options={{
                         tabBarLabel: '趋势',
+                    }}
+                />
+                <BottomTab.Screen
+                    name={'Favorite'}
+                    component={Favorite}
+                    options={{
+                        tabBarLabel: '收藏',
                     }}
                 />
                 <BottomTab.Screen
